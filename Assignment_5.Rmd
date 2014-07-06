@@ -1,0 +1,75 @@
+Title: Data Programming Bridge Week 5 R Assignment
+
+========================================================
+
+Problem 1
+Preallocating versus appending in R
+Preallocating is when the R object that is created is created at the onset with enough memory allocated to the object such that when it is later filled up with elements, the object already has memory storage for this. 
+
+Preallocation is one of the fastest ways  of memory allocation and use, but it requires that one knows ahead of time how much data one has, in order to request the memory at the onset. This can be performed for example by first counting how many rows and columns are available from the dataset and then creating a data frame of this size (preallocation).
+
+Appending in R is simply added elements, rows or objects to a pre-existing object. In order for R to this, R has to allocate new memory each time a new row or object is appended. This is not only inefficient but it is also slow, especially when large datasets are involved.
+
+
+
+
+```{r}
+#Preallocating a matrix
+x = matrix(nrow = 100, ncol = 10)
+x
+class(x)
+
+#preallocating a vector
+
+v = vector(mode ="numeric", length = 20)
+v
+class(v)
+
+#Preallocating a List
+lt = list(rep(NA,10))
+lt
+class(lt)
+
+#Preallocating a data.frame
+df = data.frame(rep(NA,10),rep(NaN,10) )
+df
+class(df)
+
+
+
+#Appending a row to a matrix
+
+x = rbind(x, c(101:110))
+x
+
+
+#Appending to a list 
+lt = c(lt,"Apples")
+lt
+
+#Appending to a data.frame
+df = rbind(df,c("x","y"))
+df
+
+
+```
+
+Problmem 2
+
+```{r}
+require(MASS)
+data(Boston)
+summary(Boston)
+myBoston = Boston[,c(1,5,6,7,10)]
+#summary(myBoston)
+
+#head(Boston)
+
+newColNames = c("Capita Crime Rate", "Nitrogen Oxide Conc", "Average Rooms", "Percentage homes before 1940", "Tax")
+
+colnames(myBoston) = newColNames
+head(myBoston)
+
+
+```
+
